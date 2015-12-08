@@ -6,7 +6,8 @@
 var linkedList = linkedListGenerator();
 function linkedListGenerator(){
   var head = null,
-      tail = null;
+      tail = null,
+      length = 0;
   //Private variables
   var getHead = function() {
       return head;
@@ -28,38 +29,65 @@ function linkedListGenerator(){
       tail.next = newNode;
       tail = newNode;
     }
+    length++;
     return newNode;
   };
 
   var get = function(number) {
-    var node = head,
+    var currNode = this.getHead(),
         i = 0;
       while (i < number) {
-        if(node === tail) {
+        if(currNode === tail) {
           return false;
         }
-      node = node.next;
+      currNode = currNode.next;
       i++;
-      }
-  return node;
-    };
-
-  var remove = function(val) {
-    var node = head,
-        i = 0,
-        removeMe = linkedList.get(val),
-        previous = linkedList.get(val - 1),
-        following = linkedList.get(val + 1);
-    while(i < 0) {
-
     }
-
-    removeMe = previous;
-    previous.next = removeMe.next + 1;
-
+    return currNode;
   };
 
-  var insert = function(value, vumber) {
+  var remove = function(val) {
+    var currNode = this.get(val),
+        previous = this.get(val - 1);
+    if ( val >= length) {
+      return false;
+    }
+    if ( length === 1 && val === 0 ) {
+      head = null;
+      tail = null;
+    } else if ( val === 0 ){
+      head = currNode.next;
+    } else if( val === length -1 ) {
+      tail = previous;
+      previous.next = null;
+    } else {
+      previous.next = currNode.next;
+    }
+    length --;
+  };
+
+  var createNode = function ( value ) {
+    return {
+      value : value,
+      next : null
+    };
+  };
+
+  var insert = function(val, index) {
+    var currNode = this.get( index ),
+        previous = this.get( index - 1 );
+        tmpNode = createNode( val );
+
+    if ( index >= length || index < 0) {
+      return false;
+    } else if ( index === 0)  {
+      tmpNode.next = currNode;
+      head = tmpNode;
+    } else {
+      previous.next = tmpNode;
+      tmpNode.next = currNode;
+    }
+      length++;
   };
 
   //Public variables
