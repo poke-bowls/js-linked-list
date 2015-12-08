@@ -34,24 +34,28 @@ function linkedListGenerator(){
   var get = function(number) {
     var node = head,
         i = 0;
-    if(head === null && tail === null) {
-      return null;
-    // } else if (n !== ){
-    //   return false;
-    } else {
-      while (node.next !== null) {
-        if(i === number) {
-          console.log('asdf');
-          return node;
+      while (i < number) {
+        if(node === tail) {
+          return false;
         }
       node = node.next;
       i++;
       }
-      return node;
-    }
-  };
+  return node;
+    };
 
-  var remove = function(number) {
+  var remove = function(val) {
+    var node = head,
+        i = 0,
+        removeMe = linkedList.get(val),
+        previous = linkedList.get(val - 1),
+        following = linkedList.get(val + 1);
+    while(i < 0) {
+
+    }
+
+    removeMe = previous;
+    previous.next = removeMe.next + 1;
 
   };
 
